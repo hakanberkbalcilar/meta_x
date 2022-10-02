@@ -38,7 +38,7 @@ class Metadata {
     required this.fileInfo,
   });
 
-  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
+  factory Metadata.fromJson(Map<dynamic, dynamic> json) => Metadata(
         title: json['title'] as String?,
         artists: [],
         album: json['album'] as String?,

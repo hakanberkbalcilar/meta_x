@@ -62,11 +62,11 @@ class MetadataProvider(private val path:String) : MediaMetadataRetriever() {
                 val splitPath = path.split("/")
                 val splitFileName = splitPath.last().split(".")
 
-                fileInfo["fileName"] =
+                fileInfo["name"] =
                     splitFileName.subList(0, splitFileName.size - 2).joinToString(".")
-                fileInfo["filePath"] = path
-                fileInfo["fileExtension"] = splitFileName.last()
-                fileInfo["fileDirectory"] = splitPath[splitPath.size - 2]
+                fileInfo["path"] = path
+                fileInfo["extension"] = splitFileName.last()
+                fileInfo["directory"] = splitPath[splitPath.size - 2]
 
                 metadata["fileInfo"] = fileInfo
 
