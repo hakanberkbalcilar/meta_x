@@ -20,29 +20,28 @@ class MetadataProvider : MediaMetadataRetriever() {
             val splitPath = path.split("/")
             val splitFileName = splitPath.last().split(".")
 
-            fileInfo["name"] =
-                splitFileName.subList(0, splitFileName.size - 2).joinToString(".")
-            fileInfo["path"] = path
             fileInfo["extension"] = splitFileName.last()
+            fileInfo["name"] = splitFileName.subList(0, splitFileName.size - 1).joinToString(".")
+            fileInfo["path"] = path
             fileInfo["directory"] = splitPath[splitPath.size - 2]
 
             metadata["fileInfo"] = fileInfo
 
             try {
-                metadata["title"] = extractMetadata(METADATA_KEY_TITLE)
-                metadata["artists"] = extractMetadata(METADATA_KEY_ARTIST)
-                metadata["album"] = extractMetadata(METADATA_KEY_ALBUM)
-                metadata["albumArtist"] = extractMetadata(METADATA_KEY_ALBUMARTIST)
-                metadata["genre"] = extractMetadata(METADATA_KEY_GENRE)
-                metadata["author"] = extractMetadata(METADATA_KEY_AUTHOR)
-                metadata["writer"] = extractMetadata(METADATA_KEY_WRITER)
-                metadata["discNumber"] = extractMetadata(METADATA_KEY_DISC_NUMBER)
-                metadata["mimeType"] = extractMetadata(METADATA_KEY_MIMETYPE)
-                metadata["duration"] = extractMetadata(METADATA_KEY_DURATION)
-                metadata["bitrate"] = extractMetadata(METADATA_KEY_BITRATE)
+                metadata["title"] = getMetaData(METADATA_KEY_TITLE)
+                metadata["artists"] = getMetaData(METADATA_KEY_ARTIST)
+                metadata["album"] = getMetaData(METADATA_KEY_ALBUM)
+                metadata["albumArtist"] = getMetaData(METADATA_KEY_ALBUMARTIST)
+                metadata["genre"] = getMetaData(METADATA_KEY_GENRE)
+                metadata["author"] = getMetaData(METADATA_KEY_AUTHOR)
+                metadata["writer"] = getMetaData(METADATA_KEY_WRITER)
+                metadata["discNumber"] = getMetaData(METADATA_KEY_DISC_NUMBER)
+                metadata["mimeType"] = getMetaData(METADATA_KEY_MIMETYPE)
+                metadata["duration"] = getMetaData(METADATA_KEY_DURATION)
+                metadata["bitrate"] = getMetaData(METADATA_KEY_BITRATE)
                 metadata["albumArt"] = embeddedPicture
 
-                val trackNumber = extractMetadata(METADATA_KEY_CD_TRACK_NUMBER)
+                val trackNumber = getMetaData(METADATA_KEY_CD_TRACK_NUMBER)
                 try {
 
                     if (trackNumber == null) {
@@ -57,8 +56,8 @@ class MetadataProvider : MediaMetadataRetriever() {
                     metadata["trackNumber"] = null
                     metadata["albumLength"] = null
                 }
-                val year = extractMetadata(METADATA_KEY_YEAR)
-                val date = extractMetadata(METADATA_KEY_DATE)
+                val year = getMetaData(METADATA_KEY_YEAR)
+                val date = getMetaData(METADATA_KEY_DATE)
 
                 if (year == null)
                     if (date == null)
@@ -74,6 +73,16 @@ class MetadataProvider : MediaMetadataRetriever() {
             catch (e:IllegalStateException){
                 Log.e("MetaXError", e.message ?: "Unknown")
                 return metadata
+            }
+        }
+
+        private fun getMetaData(i:Int): String?{
+            try{
+                val result = extractMetadata(i)
+                return result
+            }
+            catch(e:Exception){
+                 return null   
             }
         }
 }
