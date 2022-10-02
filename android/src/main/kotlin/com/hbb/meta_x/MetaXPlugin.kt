@@ -19,7 +19,7 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
     if (call.method == "getMetadata") {
-      val provider = MetadataProvider(call.argument("filePath"))
+      val provider = MetadataProvider(call.argument("filePath")!!)
 
       provider.release()
       Handler(Looper.getMainLooper())
