@@ -2,7 +2,6 @@ import 'package:meta_x/src/meta_x_method_channel.dart';
 import 'package:meta_x/src/model/metadata.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-
 abstract class MetaXPlatform extends PlatformInterface {
   MetaXPlatform() : super(token: _token);
 

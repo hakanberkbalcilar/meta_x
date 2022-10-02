@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:meta_x/meta_x.dart';
 
 void main() {
@@ -17,7 +15,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Metadata? _metadata;
-  final _metaXPlugin = MetaX();
 
   @override
   void initState() {
@@ -26,13 +23,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    _metadata =
-        await _metaXPlugin.getMetadata();
+    _metadata = await MetaX.getMetadata();
 
     if (!mounted) return;
 
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override

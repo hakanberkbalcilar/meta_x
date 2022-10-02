@@ -18,10 +18,9 @@ void main() {
   });
 
   test('getMetadata', () async {
-    MetaX metaXPlugin = MetaX();
     MockMetaXPlatform fakePlatform = MockMetaXPlatform();
     MetaXPlatform.instance = fakePlatform;
 
-    expect(await metaXPlugin.getMetadata(), null);
+    expect(await MetaX.getMetadata(), null);
   });
 }
