@@ -72,7 +72,7 @@ class MetadataProvider : MediaMetadataRetriever() {
             }
             catch (e:IllegalStateException){
                 Log.e("MetaXError", e.message ?: "Unknown")
-                return null
+                return metadata
             }
         }
 }
