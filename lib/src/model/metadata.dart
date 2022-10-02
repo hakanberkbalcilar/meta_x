@@ -16,7 +16,7 @@ class Metadata {
   final int? discNumber;
   final int? duration;
   final int? bitrate;
-  final Uint8List? cover;
+  final Uint8List? albumArt;
   final FileInfo fileInfo;
 
   Metadata({
@@ -24,6 +24,7 @@ class Metadata {
     this.artists,
     this.album,
     this.albumArtist,
+    this.albumArt,
     this.trackNumber,
     this.albumLength,
     this.year,
@@ -34,7 +35,6 @@ class Metadata {
     this.mimeType,
     this.duration,
     this.bitrate,
-    this.cover,
     required this.fileInfo,
   });
 
@@ -54,6 +54,6 @@ class Metadata {
         discNumber: int.tryParse(json['discNumber'] as String? ?? ''),
         duration: int.tryParse(json['duration'] as String? ?? ''),
         bitrate: int.tryParse(json['bitrate'] as String? ?? ''),
-        cover: json['cover'] as Uint8List?,
+        albumArt: json['albumArt'] as Uint8List?,
       );
 }

@@ -20,7 +20,7 @@ class MethodChannelMetaX extends MetaXPlatform {
 
   @override
   Future<List<Metadata>> files(List<String> paths) async {
-    final metadataList = await methodChannel.invokeMethod<List<Map>>('getFromFiles', {
+    final metadataList = await methodChannel.invokeMethod<List<dynamic>>('getFromFiles', {
       'paths': paths,
     });
     return metadataList?.map((e) => Metadata.fromJson(e)).toList() ?? [];
