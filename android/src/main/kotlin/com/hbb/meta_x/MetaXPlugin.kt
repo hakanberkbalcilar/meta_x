@@ -21,11 +21,13 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
     if (call.method == "getFromFile") {
       val provider = MetadataProvider(call.argument("path")!!)
 
+      val metadata = provider.metadata
+
       provider.release()
 
       Handler(Looper.getMainLooper())
         .post {
-            result.success(provider.metadata)
+            result.success(metadata)
         }
     } else {
       result.notImplemented()
