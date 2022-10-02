@@ -50,7 +50,7 @@ class Metadata {
         mimeType: json['mimeType'] as String?,
         trackNumber: int.tryParse(json['trackNumber'] as String? ?? ''),
         albumLength: int.tryParse(json['albumLength'] as String? ?? ''),
-        year: int.tryParse(json['year'] as String? ?? ''),
+        year: json['year'] is int ? json['year'] : int.tryParse(json['year'] as String? ?? ''),
         discNumber: int.tryParse(json['discNumber'] as String? ?? ''),
         duration: int.tryParse(json['duration'] as String? ?? ''),
         bitrate: int.tryParse(json['bitrate'] as String? ?? ''),
