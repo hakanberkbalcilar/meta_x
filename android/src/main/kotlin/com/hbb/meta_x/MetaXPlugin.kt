@@ -9,7 +9,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import java.util.ArrayList
-import java.util.HashMap
 
 class MetaXPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel: MethodChannel
@@ -35,7 +34,7 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
     }
     if (call.method == "getFromFiles") {
       val pathList : List<String> = call.argument("paths")!!
-      val metaList : ArrayList<HashMap<String, Any>> = ArrayList()
+      val metaList : ArrayList<Any> = ArrayList()
       val provider = MetadataProvider()
 
       pathList.forEach {
