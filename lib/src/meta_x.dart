@@ -3,4 +3,5 @@ import 'package:meta_x/src/model/metadata.dart';
 
 class MetaX {
   static Future<Metadata?> file(String path) => MetaXPlatform.instance.file(path);
+  static Future<List<Metadata>> files(List<String> paths) => MetaXPlatform.instance.files(paths);
 }

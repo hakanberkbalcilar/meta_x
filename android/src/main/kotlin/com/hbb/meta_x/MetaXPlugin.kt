@@ -8,6 +8,8 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
+import java.util.ArrayList
+import java.util.HashMap
 
 class MetaXPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel: MethodChannel
@@ -20,17 +22,34 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
     if (call.method == "getFromFile") {
-      val provider = MetadataProvider(call.argument("path")!!)
+      val provider = MetadataProvider()
+      provider.setPath(call.argument("path")!!)
 
-      val metadata = provider.metadata
-
-      Log.e("MetadataInfo", metadata?.get("title").toString())
+      val meta = provider.metadata
 
       provider.release()
-      //result.success(metadata)
       Handler(Looper.getMainLooper())
         .post {
-            result.success(metadata)
+            result.success(meta)
+        }
+    }
+    if (call.method == "getFromFiles") {
+      val pathList : List<String> = call.argument("paths")!!
+      val metaList : ArrayList<HashMap<String, Any>> = ArrayList()
+      val provider = MetadataProvider()
+
+      pathList.forEach {
+        provider.setPath(call.argument("path")!!)
+
+        val meta = provider.metadata
+        if(meta != null)
+          metaList.add(meta)
+      }
+
+      provider.release()
+      Handler(Looper.getMainLooper())
+        .post {
+          result.success(pathList)
         }
     } else {
       result.notImplemented()

@@ -3,9 +3,12 @@ package com.hbb.meta_x
 import android.media.MediaMetadataRetriever
 import android.util.Log
 
-class MetadataProvider(private val path:String) : MediaMetadataRetriever() {
+class MetadataProvider : MediaMetadataRetriever() {
 
-    init {
+    private var path: String = ""
+
+    fun setPath(path:String) {
+        this.path = path
         setDataSource(path)
     }
 
