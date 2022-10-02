@@ -24,7 +24,7 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
 
       val metadata = provider.metadata
 
-      Log.e("MetadataError", metadata?.get("title").toString())
+      Log.e("MetadataInfo", metadata?.get("title").toString())
 
       provider.release()
       result.success(metadata)
