@@ -8,6 +8,9 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockMetaXPlatform with MockPlatformInterfaceMixin implements MetaXPlatform {
   @override
   Future<Metadata?> file(String path) => Future.value(null);
+
+  @override
+  Future<List<Metadata>> files(List<String> paths) => Future.value([]);
 }
 
 void main() {

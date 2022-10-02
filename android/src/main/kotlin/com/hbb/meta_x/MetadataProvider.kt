@@ -15,6 +15,19 @@ class MetadataProvider : MediaMetadataRetriever() {
     val metadata: HashMap<String, Any?>?
         get() {
             val metadata = HashMap<String, Any?>()
+
+            val fileInfo = HashMap<String, Any?>()
+            val splitPath = path.split("/")
+            val splitFileName = splitPath.last().split(".")
+
+            fileInfo["name"] =
+                splitFileName.subList(0, splitFileName.size - 2).joinToString(".")
+            fileInfo["path"] = path
+            fileInfo["extension"] = splitFileName.last()
+            fileInfo["directory"] = splitPath[splitPath.size - 2]
+
+            metadata["fileInfo"] = fileInfo
+
             try {
                 metadata["title"] = extractMetadata(METADATA_KEY_TITLE)
                 metadata["artists"] = extractMetadata(METADATA_KEY_ARTIST)
@@ -55,18 +68,6 @@ class MetadataProvider : MediaMetadataRetriever() {
                             date.split("-".toRegex()).toTypedArray()[0].trim { it <= ' ' }
                 else
                     metadata["year"] = year.trim { it <= ' ' }.toInt()
-
-                val fileInfo = HashMap<String, Any?>()
-                val splitPath = path.split("/")
-                val splitFileName = splitPath.last().split(".")
-
-                fileInfo["name"] =
-                    splitFileName.subList(0, splitFileName.size - 2).joinToString(".")
-                fileInfo["path"] = path
-                fileInfo["extension"] = splitFileName.last()
-                fileInfo["directory"] = splitPath[splitPath.size - 2]
-
-                metadata["fileInfo"] = fileInfo
 
                 return metadata
             }
