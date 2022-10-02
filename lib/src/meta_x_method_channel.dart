@@ -15,7 +15,6 @@ class MethodChannelMetaX extends MetaXPlatform {
     final metadata = await methodChannel.invokeMethod<Map<dynamic, dynamic>>('getFromFile', {
       'path': path,
     });
-    log(metadata?.toString() ?? "what", name: "MetaInfo");
     return metadata == null ? null : Metadata.fromJson(metadata);
   }
 }
