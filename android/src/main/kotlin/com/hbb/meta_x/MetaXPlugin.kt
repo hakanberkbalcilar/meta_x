@@ -22,8 +22,11 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
       val provider = MetadataProvider(call.argument("path")!!)
 
       provider.release()
+
       Handler(Looper.getMainLooper())
-        .post { result.success(provider.metadata) }
+        .post {
+            result.success(provider.metadata)
+        }
     } else {
       result.notImplemented()
     }
