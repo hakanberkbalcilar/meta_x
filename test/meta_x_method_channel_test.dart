@@ -18,7 +18,7 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getMetadata', () async {
-    expect(await platform.getMetadata(), null);
+  test('getFromFile', () async {
+    expect(await platform.file(''), null);
   });
 }

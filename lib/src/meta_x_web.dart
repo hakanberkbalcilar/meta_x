@@ -1,4 +1,3 @@
-
 import 'dart:html' as html show window;
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -16,7 +15,7 @@ class MetaXWeb extends MetaXPlatform {
 
   /// Returns a [String] containing the version of the platform.
   @override
-  Future<Metadata?> getMetadata() async {
+  Future<Metadata?> file(String path) async {
     // final metadata = html.window.navigator.userAgent;
     // return metadata;
     return null;

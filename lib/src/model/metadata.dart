@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:meta_x/src/model/file_info.dart';
 
 class Metadata {
   final String? title;
@@ -8,7 +9,6 @@ class Metadata {
   final String? genre;
   final String? author;
   final String? writer;
-  final String? filePath;
   final String? mimeType;
   final int? trackNumber;
   final int? albumLength;
@@ -17,12 +17,28 @@ class Metadata {
   final int? duration;
   final int? bitrate;
   final Uint8List? cover;
+  final FileInfo fileInfo;
 
-  Metadata(
-      {this.title, this.artists, this.album, this.albumArtist, this.trackNumber, this.albumLength, this.year, this.genre, this.author, this.writer, this.discNumber, this.mimeType, this.duration, this.bitrate, this.cover, this.filePath});
+  Metadata({
+    this.title,
+    this.artists,
+    this.album,
+    this.albumArtist,
+    this.trackNumber,
+    this.albumLength,
+    this.year,
+    this.genre,
+    this.author,
+    this.writer,
+    this.discNumber,
+    this.mimeType,
+    this.duration,
+    this.bitrate,
+    this.cover,
+    required this.fileInfo,
+  });
 
-  factory Metadata.fromJson(Map<String, dynamic> json) =>
-      Metadata(
+  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
         title: json['title'] as String?,
         artists: [],
         album: json['album'] as String?,
@@ -30,7 +46,7 @@ class Metadata {
         genre: json['genre'] as String?,
         author: json['author'] as String?,
         writer: json['writer'] as String?,
-        filePath: json['filePath'] as String?,
+        fileInfo: FileInfo.fromJson(json['fileInfo']),
         mimeType: json['mimeType'] as String?,
         trackNumber: int.tryParse(json['trackNumber'] as String? ?? ''),
         albumLength: int.tryParse(json['albumLength'] as String? ?? ''),

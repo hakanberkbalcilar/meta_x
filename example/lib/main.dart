@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    _metadata = await MetaX.getMetadata();
+    _metadata = await MetaX.file('');
 
     if (!mounted) return;
 

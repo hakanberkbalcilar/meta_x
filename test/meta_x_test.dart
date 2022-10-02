@@ -7,7 +7,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockMetaXPlatform with MockPlatformInterfaceMixin implements MetaXPlatform {
   @override
-  Future<Metadata?> getMetadata() => Future.value(null);
+  Future<Metadata?> file(String path) => Future.value(null);
 }
 
 void main() {
@@ -17,10 +17,10 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelMetaX>());
   });
 
-  test('getMetadata', () async {
+  test('getFromFile', () async {
     MockMetaXPlatform fakePlatform = MockMetaXPlatform();
     MetaXPlatform.instance = fakePlatform;
 
-    expect(await MetaX.getMetadata(), null);
+    expect(await MetaX.file(''), null);
   });
 }

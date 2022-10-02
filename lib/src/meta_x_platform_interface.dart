@@ -16,7 +16,7 @@ abstract class MetaXPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<Metadata?> getMetadata() {
+  Future<Metadata?> file(String path) {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 }

@@ -9,8 +9,10 @@ class MethodChannelMetaX extends MetaXPlatform {
   final methodChannel = const MethodChannel('meta_x');
 
   @override
-  Future<Metadata?> getMetadata() async {
-    final metadata = await methodChannel.invokeMethod<Map<String, dynamic>>('getMetadata');
+  Future<Metadata?> file(String path) async {
+    final metadata = await methodChannel.invokeMethod<Map<String, dynamic>>('getFromFile', {
+      'path': path,
+    });
     return metadata == null ? null : Metadata.fromJson(metadata);
   }
 }
