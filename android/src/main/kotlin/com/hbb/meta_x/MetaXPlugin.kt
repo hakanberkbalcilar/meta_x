@@ -27,11 +27,11 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
       Log.e("MetadataError", metadata?.get("title").toString())
 
       provider.release()
-
-      Handler(Looper.getMainLooper())
-        .post {
-            result.success(metadata)
-        }
+      result.success(metadata)
+ //     val handler = Handler(Looper.getMainLooper())
+   //     .post {
+    //        result.success(metadata)
+     //   }
     } else {
       result.notImplemented()
     }
