@@ -29,18 +29,14 @@ class MetadataProvider(private val path:String) : MediaMetadataRetriever() {
 
                 val trackNumber = extractMetadata(METADATA_KEY_CD_TRACK_NUMBER)
                 try {
-                    Log.i("What trackNumber", trackNumber ?: "null")
+
                     if (trackNumber == null) {
                         metadata["trackNumber"] = null
                         metadata["albumLength"] = null
                     } else {
-                        metadata["trackNumber"] =
-                            trackNumber.split("/".toRegex()).toTypedArray()[0].trim { it <= ' ' }
-
-                        metadata["albumLength"] =
-                            trackNumber.split("/".toRegex())
-                                .toTypedArray()[trackNumber.split("/".toRegex())
-                                .toTypedArray().size - 1].trim { it <= ' ' }
+                        val splitTrackNumber = trackNumber.split("/".toRegex()).toTypedArray()
+                        metadata["trackNumber"] = splitTrackNumber[0].trim { it <= ' ' }
+                        metadata["albumLength"] = splitTrackNumber[splitTrackNumber.toTypedArray().size - 1].trim { it <= ' ' }
                     }
                 } catch (error: Exception) {
                     metadata["trackNumber"] = null
@@ -48,7 +44,7 @@ class MetadataProvider(private val path:String) : MediaMetadataRetriever() {
                 }
                 val year = extractMetadata(METADATA_KEY_YEAR)
                 val date = extractMetadata(METADATA_KEY_DATE)
-                Log.i("What Year", date ?: "null")
+
                 if (year == null)
                     if (date == null)
                         metadata["year"] = null
