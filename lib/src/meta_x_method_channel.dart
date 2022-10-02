@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +15,7 @@ class MethodChannelMetaX extends MetaXPlatform {
     final metadata = await methodChannel.invokeMethod('getFromFile', {
       'path': path,
     });
+    log(metadata, name: "MetaInfo");
     return metadata == null ? null : Metadata.fromJson(metadata);
   }
 }
