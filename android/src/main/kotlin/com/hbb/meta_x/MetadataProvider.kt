@@ -39,7 +39,7 @@ class MetadataProvider : MediaMetadataRetriever() {
                     } else {
                         val splitTrackNumber = trackNumber.split("/".toRegex()).toTypedArray()
                         metadata["trackNumber"] = splitTrackNumber[0].trim { it <= ' ' }
-                        metadata["albumLength"] = splitTrackNumber[splitTrackNumber.toTypedArray().size - 1].trim { it <= ' ' }
+                        metadata["albumLength"] = splitTrackNumber[splitTrackNumber.size - 1].trim { it <= ' ' }
                     }
                 } catch (error: Exception) {
                     metadata["trackNumber"] = null

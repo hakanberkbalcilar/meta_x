@@ -38,7 +38,7 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
       val provider = MetadataProvider()
 
       pathList.forEach {
-        provider.setPath(call.argument("path")!!)
+        provider.setPath(it)
 
         val meta = provider.metadata
         if(meta != null)
