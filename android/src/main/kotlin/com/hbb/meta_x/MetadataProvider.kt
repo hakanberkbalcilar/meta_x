@@ -14,9 +14,8 @@ class MetadataProvider : MediaMetadataRetriever() {
 
     val metadata: HashMap<String, Any?>?
         get() {
+            val metadata = HashMap<String, Any?>()
             try {
-
-                val metadata = HashMap<String, Any?>()
                 metadata["title"] = extractMetadata(METADATA_KEY_TITLE)
                 metadata["artists"] = extractMetadata(METADATA_KEY_ARTIST)
                 metadata["album"] = extractMetadata(METADATA_KEY_ALBUM)
@@ -28,7 +27,7 @@ class MetadataProvider : MediaMetadataRetriever() {
                 metadata["mimeType"] = extractMetadata(METADATA_KEY_MIMETYPE)
                 metadata["duration"] = extractMetadata(METADATA_KEY_DURATION)
                 metadata["bitrate"] = extractMetadata(METADATA_KEY_BITRATE)
-                metadata["cover"] = embeddedPicture
+                metadata["albumArt"] = embeddedPicture
 
                 val trackNumber = extractMetadata(METADATA_KEY_CD_TRACK_NUMBER)
                 try {
@@ -72,7 +71,8 @@ class MetadataProvider : MediaMetadataRetriever() {
                 return metadata
             }
             catch (e:IllegalStateException){
-                return null
+                Log.e("MetaXError", e.message ?: "Unknown")
+                return metadata
             }
         }
 }

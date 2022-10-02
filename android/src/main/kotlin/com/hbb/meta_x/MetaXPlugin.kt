@@ -38,11 +38,15 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
       val provider = MetadataProvider()
 
       pathList.forEach {
-        provider.setPath(it)
+        try{
+          provider.setPath(it)
 
-        val meta = provider.metadata
-        if(meta != null)
-          metaList.add(meta)
+          val meta = provider.metadata
+          if(meta != null)
+            metaList.add(meta)
+        }catch(e:Exception){
+          Log.e("MetaXError", e.message ?: "Unknown")
+        }
       }
 
       provider.release()
