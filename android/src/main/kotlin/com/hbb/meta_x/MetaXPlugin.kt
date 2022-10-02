@@ -2,6 +2,7 @@ package com.hbb.meta_x
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -22,6 +23,8 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
       val provider = MetadataProvider(call.argument("path")!!)
 
       val metadata = provider.metadata
+
+      Log.e("MetadataError", metadata?.get("title").toString())
 
       provider.release()
 
