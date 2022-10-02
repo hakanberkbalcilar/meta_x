@@ -10,7 +10,7 @@ class MethodChannelMetaX extends MetaXPlatform {
 
   @override
   Future<Metadata?> file(String path) async {
-    final metadata = await methodChannel.invokeMethod<Map<String, dynamic>>('getFromFile', {
+    final metadata = await methodChannel.invokeMethod('getFromFile', {
       'path': path,
     });
     return metadata == null ? null : Metadata.fromJson(metadata);
