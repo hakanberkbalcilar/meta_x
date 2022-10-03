@@ -52,7 +52,7 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
       provider.release()
       Handler(Looper.getMainLooper())
         .post {
-          result.success(pathList)
+          result.success(metaList)
         }
     } else {
       result.notImplemented()
