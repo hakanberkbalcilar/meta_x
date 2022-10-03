@@ -35,13 +35,16 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
     else if (call.method == "getFromFiles") {
       val pathList : List<String> = call.argument("paths")!!
       val metaList : ArrayList<Any> = ArrayList()
-      val provider = MetadataProvider()
 
       pathList.forEach {
         try{
+          val provider = MetadataProvider()
           provider.setPath(it)
 
           val meta = provider.metadata
+
+          provider.release()
+          
           if(meta != null)
             metaList.add(meta)
         }catch(e:Exception){
@@ -49,7 +52,7 @@ class MetaXPlugin: FlutterPlugin, MethodCallHandler {
         }
       }
 
-      provider.release()
+      
       Handler(Looper.getMainLooper())
         .post {
           result.success(metaList)
